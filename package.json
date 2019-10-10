@@ -4,6 +4,7 @@
   "description": "\"learning app - video ideas\"",
   "main": "dist/app.js",
   "scripts": {
+    "build": "tsc",
     "start": "tsc && node dist/app.js",
     "test": "./node_modules/.bin/cucumber-js -p default"
   },
