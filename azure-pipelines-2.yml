@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: '40b38ef2-6ad9-4e65-b4ca-b812ebfa7468'
   imageRepository: 'ncnode'
   containerRegistry: 'ncregistry.azurecr.io'
-  dockerfilePath: 'testNodeApp/Dockerfile'
+  dockerfilePath: 'Dockerfile'
   tag: '$(Build.BuildId)'
   
   # Agent VM image name
