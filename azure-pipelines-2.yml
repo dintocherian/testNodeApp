@@ -34,8 +34,10 @@ stages:
         azureSubscription: 'Free Trial (6b74b025-e1c8-4bad-8591-e20a8bb269de)'
         azureContainerRegistry: '{"loginServer":"ncregistry.azurecr.io", "id" : "/subscriptions/6b74b025-e1c8-4bad-8591-e20a8bb269de/resourceGroups/ncregistry/providers/Microsoft.ContainerRegistry/registries/ncregistry"}'
         dockerComposeFile: 'docker-compose.yml'
-        action: 'Run a Docker Compose command'
-        dockerComposeCommand: 'docker-compose build'
+        action: Push services
+        projectName: $(Build.Repository.Name)
+        qualifyImageNames: true
+        additionalImageTags: $(Build.BuildId)
 
 - stage: Deploy
   jobs:
