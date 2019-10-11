@@ -1,0 +1,58 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: '40b38ef2-6ad9-4e65-b4ca-b812ebfa7468'
+  imageRepository: 'ncnode'
+  containerRegistry: 'ncregistry.azurecr.io'
+  dockerfilePath: '**/Dockerfile'
+  tag: '$(Build.BuildId)'
+  
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    pool:
+        name: Hosted VS2017
+    steps:
+
+      - task: AzureRmWebAppDeployment@4
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'Free Trial (6b74b025-e1c8-4bad-8591-e20a8bb269de)'
+          appType: 'webAppContainer'
+          WebAppName: 
+          DockerNamespace: 'ncregistry.azurecr.io'
+          DockerRepository: 'ncnode'
+          DockerImageTag: '$(Build.BuildId)'
+
+
