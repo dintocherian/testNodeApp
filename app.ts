@@ -10,7 +10,7 @@ mongoose.connect('mongodb+srv://mongo_db_user:mongodb@cluster0-pa1xs.mongodb.net
 .then(() => console.log('mongodb connected..'))
 .catch((error) => console.log(error));
 
-const port = 8080;
+const port = 80;
 
 // app.engine('handlebars', exphbs({
 //   defaultLayout: 'main'
