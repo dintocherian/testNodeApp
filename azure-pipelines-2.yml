@@ -28,15 +28,14 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
+    - task: DockerCompose@0
       inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'Free Trial (6b74b025-e1c8-4bad-8591-e20a8bb269de)'
+        azureContainerRegistry: '{"loginServer":"ncregistry.azurecr.io", "id" : "/subscriptions/6b74b025-e1c8-4bad-8591-e20a8bb269de/resourceGroups/ncregistry/providers/Microsoft.ContainerRegistry/registries/ncregistry"}'
+        dockerComposeFile: 'docker-compose.yml'
+        action: 'Run a Docker Compose command'
+        dockerComposeCommand: 'docker-compose build'
 
 - stage: Deploy
   jobs:
