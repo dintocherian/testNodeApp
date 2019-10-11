@@ -50,7 +50,7 @@ stages:
           ConnectionType: 'AzureRM'
           azureSubscription: 'Free Trial (6b74b025-e1c8-4bad-8591-e20a8bb269de)'
           appType: 'webAppContainer'
-          WebAppName: 
+          WebAppName: 'nodeTestAppDocker'
           DockerNamespace: 'ncregistry.azurecr.io'
           DockerRepository: 'ncnode'
           DockerImageTag: '$(Build.BuildId)'
