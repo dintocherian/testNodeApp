@@ -54,6 +54,5 @@ stages:
           DockerNamespace: 'ncregistry.azurecr.io'
           DockerRepository: 'ncnode'
           DockerImageTag: '$(Build.BuildId)'
-          StartupCommand: docker login ncregistry.azurecr.io -u ncregistry -p pDPv01IpLYEcp8uLJ=vgVuSsLwwC6Mom
 
 
