@@ -1,1 +1,3 @@
 # testNodeApp
+
+testing docker compose
